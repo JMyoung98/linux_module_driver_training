@@ -8,7 +8,7 @@ PWD := $(shell pwd)
 
 default:
 	$(MAKE) -C $(KDIR) M=$(PWD) modules $(CROSS)
-	cp $(MOD).ko /srv/nfs
+	# cp $(MOD).ko /srv/nfs
 clean:
 #	rm -rf *.ko
 	rm -rf *.mod.*

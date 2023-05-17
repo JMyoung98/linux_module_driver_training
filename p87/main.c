@@ -7,7 +7,7 @@
 int main(int argc, char * argv[]){
 	int ret;
 
-	ret = mknod("/dev/testdev1", S_IFCHR | S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH, (240<<8)|1);
+	ret = mknod("/dev/testdev1", S_IFCHR | 00600 | 00060 | 00006, (240<<8)|1);
 	if (ret<0){
 		perror("mknod()");
 		return 1;
