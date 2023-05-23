@@ -23,7 +23,11 @@ int main(int argc,char * argv[])
 	}
 	buff = atoi(argv[1]);
 
+<<<<<<< HEAD
 //   dev = open( DEVICE_FILENAME, O_RDWR|O_NDELAY );
+=======
+    //dev = open( DEVICE_FILENAME, O_RDWR|O_NDELAY );
+>>>>>>> fba85043abdb87e3b1fc23bcf7efacd16ee3d4b1
     dev = open( DEVICE_FILENAME, O_RDWR );
 	if(dev<0)
 	{

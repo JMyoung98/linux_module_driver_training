@@ -122,16 +122,26 @@ void key_read(unsigned char * key_data)
 
 int ledkeydev_open (struct inode *inode, struct file *filp)
 {
+<<<<<<< HEAD
+=======
+	int i;
+>>>>>>> fba85043abdb87e3b1fc23bcf7efacd16ee3d4b1
     ISR_INFO * pIsrInfo;
 	int num0 = MAJOR(inode->i_rdev); 
     int num1 = MINOR(inode->i_rdev); 
     printk( "ledkeydev open -> major : %d\n", num0 );
     printk( "ledkeydev open -> minor : %d\n", num1 );
 	pIsrInfo = (ISR_INFO*)kmalloc(sizeof(ISR_INFO),GFP_KERNEL);
+<<<<<<< HEAD
 	//for(i=0;i<8;i++) pIsrInfo->sw_irq[i]=0;	
 	//pIsrInfo->sw_no=0;
 	memset(pIsrInfo,0x00,sizeof(ISR_INFO));
 	filp->private_data = (void *)pIsrInfo;
+=======
+	for(i=0;i<8;i++) pIsrInfo->sw_irq[i]=0;	
+	pIsrInfo->sw_no=0;
+	filp->private_data = pIsrInfo;
+>>>>>>> fba85043abdb87e3b1fc23bcf7efacd16ee3d4b1
 	irq_init(filp);
     return 0;
 }
@@ -147,11 +157,18 @@ ssize_t ledkeydev_read(struct file *filp, char *buf, size_t count, loff_t *f_pos
 //	key_read(&kbuf);     
 	if(!(filp->f_flags & O_NONBLOCK))	//BLOCK MODE
 	{
+<<<<<<< HEAD
 		//if(pIsrInfo->sw_no==0)
 		//	interruptible_sleep_on(&WaitQueue_Read);
 	}else return -EAGAIN;
 	ret=copy_to_user(buf,&pIsrInfo->sw_no,count);
 	wait_event_intterptible(WaitQueu_Read);
+=======
+		if(pIsrInfo->sw_no==0)
+			interruptible_sleep_on(&WaitQueue_Read);
+	}else return -EAGAIN;
+	ret=copy_to_user(buf,&pIsrInfo->sw_no,count);
+>>>>>>> fba85043abdb87e3b1fc23bcf7efacd16ee3d4b1
 	pIsrInfo->sw_no = 0;
 	if(ret < 0)
 		return -ENOMEM;
